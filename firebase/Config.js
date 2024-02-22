@@ -14,15 +14,23 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
 ////MUISTA TEHDÄ DOTENV-TIEDOSTO!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-
 const firebaseConfig = {
-  apiKey: "AIzaSyClPvQxDQXt2XKDcaJp4F5YOgOIq_ekaAQ",
-  authDomain: "sovellus-c0986.firebaseapp.com",
-  projectId: "sovellus-c0986",
-  storageBucket: "sovellus-c0986.appspot.com",
-  messagingSenderId: "731794033893",
-  appId: "1:731794033893:web:0526924379af7d9d54580c"
-};
+    apiKey: process.env.EXPO_PUBLIC_API_KEY,
+    authDomain: process.env.EXPO_PUBLIC_AUTH_DOMAIN,
+    projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
+    storageBucket: process.env.EXPO_PUBLIC_STORAGE_BUCKET,
+    messagingSenderId: process.env.EXPO_PUBLIC_MESSAGING_SENDER_ID,
+    appId: process.env.EXPO_PUBLIC_APP_ID
+  
+  }
+// const firebaseConfig = {
+//   apiKey: "AIzaSyClPvQxDQXt2XKDcaJp4F5YOgOIq_ekaAQ",
+//   authDomain: "sovellus-c0986.firebaseapp.com",
+//   projectId: "sovellus-c0986",
+//   storageBucket: "sovellus-c0986.appspot.com",
+//   messagingSenderId: "731794033893",
+//   appId: "1:731794033893:web:0526924379af7d9d54580c"
+// };
 
 // Initialize Firebase
 

@@ -8,7 +8,6 @@ import { useReducer, useRef, useEffect } from 'react';
 import Timer from './components/Timer';
 import Clock from './components/Clock';
 import Home from './screens/Home';
-
 import TimerPage from './screens/TimerPage';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';

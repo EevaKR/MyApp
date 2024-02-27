@@ -1,10 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { View, Text } from 'react-native'
-import React from 'react'
 import { orderBy, getFirestore, collection, addDoc, serverTimestamp, query, onSnapshot } from "firebase/firestore";
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-
+import { getStorage, ref, getDownloadURL } from 'firebase/storage'
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -58,4 +56,7 @@ export {
   orderBy,
   signInWithEmailAndPassword,
   getAuth,
+  getStorage, 
+  ref, 
+  getDownloadURL,
 }

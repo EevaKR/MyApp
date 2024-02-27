@@ -1,20 +1,62 @@
-import { View, Text, Button, Image } from 'react-native';
-import React from 'react';
+import { View, Text, Button, Image, TouchableHighlight } from 'react-native';
+import React, { useLayoutEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useReducer, useRef, useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { useState } from 'react';
+import { initializeApp } from 'firebase/app';
+import {getStorage, ref, getDownloadURL} from 'firebase/storage'
+import {AntDesign} from '@expo/vector-icons'
+import { getFirestore } from 'firebase/firestore'; // Add this import statement
 
 
-//kysy opelta mitä tähän pitää laittaa propseiksi!!!!!
-export default function Home() {
+/// EI TUO KUVAA; MIKÄ ONGELMA???
+//NAVIGAATIOSSA MYÖS ONGELMAA, NAVIGAATIONBAR KESKEN JOTEN EI TUO NAVIGATION
+
+//tee liitos timerpage.js:aan 
+// tee erillinen styles.js ja importaa se
+//lisää image ja sen firestore-jutut,nyt ei näytä kuvaa, yhteys toimii kuitenkin??
+//muuta stylesejä mm eri fontti
+export default function Home({navigation}) {
+
+useLayoutEffect(() => {
+    navigation.setOptions({
+        headerStyle: {
+            backgroundColor: ' #FB8DA0'
+        },
+        headerRight: () => (
+            <AntDesign
+            style={styles.navButton}
+            name='arrowright'
+            size={24}
+            onPress={() => navigation.navigate('TimerPage')}
+            />
+        )
+    })
+}, [])
+
+    const [url, setUrl] = useState('https://firebasestorage.googleapis.com/v0/b/sovellus-c0986.appspot.com/o/tooth-1670434_1920.png?alt=media&token=567a12db-d82b-4fdc-842b-ddd76b90d659');
+//KUVA EI TOIMI NYT ALLA OLEVALLLA KOODILLA, VOISIKO KORJATA???
+    useEffect(() => {
+        const func = async () => {
+            const storage = getFirestore();
+            const reference = ref()(storage,'/tooth-1670434_1920.png');
+            await getDownloadURL(reference)
+            .then((x) => {
+                setUrl(x);
+            })
+        }
+        if (url == undefined) {func()};
+    }, [])
 
     return (
         <View style={styles.container}>
-            <Image></Image>
-            
-            <Text style = {styles.text}>EEVA'S HAMMASSOVELLUS</Text>
+            <Image
+                style={{ width: '50%', height: '50%' }}
+                source={{ uri: url }}
+            />
+            <Text style={styles.text}>PEARL APP</Text>
         </View>
     )
 }
@@ -45,6 +87,15 @@ const styles = StyleSheet.create({
         elevation: 30,
         padding: 20,
 
+    },
+    navButton: {
+        container: {
+            padding: 10,
+        },
+        navButton: {
+            marginRight: 5,
+            padding: 4,
+        }
     }
 })
 

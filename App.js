@@ -11,6 +11,7 @@ import Home from './screens/Home';
 import TimerPage from './screens/TimerPage';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { AntDesign } from '@expo/vector-icons'
 
 
 ///hox tee components and screens kansiot ja jaa osiot ja sivut niihin
@@ -55,14 +56,22 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{
-              title: 'Home',
-              headerTitle: 'Home'}}
-          /> 
-          <Stack.Screen name = "TimerPage" component= {TimerPage}  />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            title: 'Home',
+            headerTitle: 'Home'
+          }}
+        />
+        <Stack.Screen
+          name="TimerPage"
+          component={TimerPage}
+          option={{
+            title: 'TimerPage',
+            headerTitle: 'TimerPage'
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

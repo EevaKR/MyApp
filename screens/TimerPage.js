@@ -1,10 +1,20 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, Button } from 'react-native'
+import React, { useLayoutEffect } from 'react'
 import { StyleSheet } from 'react-native'
-import { useReducer, useRef, useEffect } from 'react';
+import { useReducer, useRef, useEffect, useState } from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function TimerPage(button, formattedtime) {
+export default function TimerPage(button, formattedtime, ) {
     
+// useLayoutEffect(() => {
+//     navigation.setOptions({
+//         headerStyle: {
+//             backgroundColor: '#FB8DA0'
+//         }
+//     })
+// }, [])
+
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
 
@@ -53,7 +63,6 @@ export default function TimerPage(button, formattedtime) {
         return <Text style={styles.time}>{hours.padStart(2, '0')}.{minutes.padStart(2, '0')}.{seconds.padStart(2, '0')}</Text>
     }
 
-
     return (
 
         <View>
@@ -66,8 +75,6 @@ export default function TimerPage(button, formattedtime) {
         </View>
     )
 }
-
-
 
 const styles = StyleSheet.create({
     container: {

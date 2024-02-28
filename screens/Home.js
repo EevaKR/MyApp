@@ -6,8 +6,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { useState } from 'react';
 import { initializeApp } from 'firebase/app';
-import {getStorage, ref, getDownloadURL} from 'firebase/storage'
-import {AntDesign} from '@expo/vector-icons'
+import { getStorage, ref, getDownloadURL } from 'firebase/storage'
+import { AntDesign } from '@expo/vector-icons'
 import { getFirestore } from 'firebase/firestore'; // Add this import statement
 
 
@@ -18,36 +18,36 @@ import { getFirestore } from 'firebase/firestore'; // Add this import statement
 // tee erillinen styles.js ja importaa se
 //lisää image ja sen firestore-jutut,nyt ei näytä kuvaa, yhteys toimii kuitenkin??
 //muuta stylesejä mm eri fontti
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
 
-useLayoutEffect(() => {
-    navigation.setOptions({
-        headerStyle: {
-            backgroundColor: ' #FB8DA0'
-        },
-        headerRight: () => (
-            <AntDesign
-            style={styles.navButton}
-            name='arrowright'
-            size={24}
-            onPress={() => navigation.navigate('TimerPage')}
-            />
-        )
-    })
-}, [])
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerStyle: {
+                backgroundColor: ' #FB8DA0'
+            },
+            headerRight: () => (
+                <AntDesign
+                    style={styles.navButton}
+                    name='arrowright'
+                    size={24}
+                    onPress={() => navigation.navigate('TimerPage')}
+                />
+            )
+        })
+    }, [])
 
-    const [url, setUrl] = useState('https://firebasestorage.googleapis.com/v0/b/sovellus-c0986.appspot.com/o/tooth-1670434_1920.png?alt=media&token=567a12db-d82b-4fdc-842b-ddd76b90d659');
-//KUVA EI TOIMI NYT ALLA OLEVALLLA KOODILLA, VOISIKO KORJATA???
+    //const [url, setUrl] = useState('https://firebasestorage.googleapis.com/v0/b/sovellus-c0986.appspot.com/o/tooth-1670434_1920.png?alt=media&token=567a12db-d82b-4fdc-842b-ddd76b90d659');
+    const [url, setUrl] = useState()
     useEffect(() => {
         const func = async () => {
             const storage = getFirestore();
-            const reference = ref()(storage,'/tooth-1670434_1920.png');
+            const reference = ref()(storage, '/likainen_hammas.png');
             await getDownloadURL(reference)
-            .then((x) => {
-                setUrl(x);
-            })
+                .then((x) => {
+                    setUrl(x);
+                })
         }
-        if (url == undefined) {func()};
+        if (url == undefined) { func() };
     }, [])
 
     return (
@@ -91,11 +91,11 @@ const styles = StyleSheet.create({
     navButton: {
         container: {
             padding: 10,
-        },
-        navButton: {
             marginRight: 5,
             padding: 4,
+
         }
     }
 })
 
+// puhdas hammas /tooth-1670434_1920.png

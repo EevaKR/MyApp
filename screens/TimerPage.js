@@ -1,19 +1,21 @@
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button, Image } from 'react-native'
 import React, { useLayoutEffect } from 'react'
 import { StyleSheet } from 'react-native'
 import { useReducer, useRef, useEffect, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
+import { getStorage, ref, getDownloadURL } from 'firebase/storage'
+import { initializeApp } from 'firebase/app';
 
-export default function TimerPage(button, formattedtime, ) {
-    
-// useLayoutEffect(() => {
-//     navigation.setOptions({
-//         headerStyle: {
-//             backgroundColor: '#FB8DA0'
-//         }
-//     })
-// }, [])
+export default function TimerPage(button, formattedtime,) {
+
+    // useLayoutEffect(() => {
+    //     navigation.setOptions({
+    //         headerStyle: {
+    //             backgroundColor: '#FB8DA0'
+    //         }
+    //     })
+    // }, [])
 
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
@@ -41,7 +43,20 @@ export default function TimerPage(button, formattedtime, ) {
     const [state, dispatch] = useReducer(reducer, initialState)
     const timerId = useRef(null)
 
+    const [url, setUrl] = useState();
 
+    useEffect(() => {
+        const func = async () => {
+            const storage = getStorage();
+            const reference = ref(storage, '/cute-tooth-characters-feel-bad-flat-style-unhealthy-teeth-plaque-caries-holes_153905-276.jpg');
+            await getDownloadURL(reference)
+                .then((x) => {
+                    setUrl(x);
+                })
+        }
+
+        if (url == undefined) { func() };
+    }, []);
 
 
     useEffect(() => {
@@ -63,13 +78,22 @@ export default function TimerPage(button, formattedtime, ) {
         return <Text style={styles.time}>{hours.padStart(2, '0')}.{minutes.padStart(2, '0')}.{seconds.padStart(2, '0')}</Text>
     }
 
-    return (
 
+    ///aika laskee 2min nollaan ja sit tulee iloinen hymy
+    return (
         <View>
+            <Image
+                style={styles.image}
+                source={{ uri: url }}
+
+
+            />
             <FormattedTime />
-            <View style={styles.buttons} >
+            <View style={styles.buttons}>
                 <Button style={styles.button} title="ALOITA" onPress={() => dispatch({ type: 'aloita' })} />
+                <View style={styles.space} />
                 <Button style={styles.button} title="LOPETA" onPress={() => dispatch({ type: 'lopeta' })} />
+                <View style={styles.space} />
                 <Button style={styles.button} title="NOLLAA" onPress={() => dispatch({ type: 'nollaa' })} />
             </View>
         </View>
@@ -83,28 +107,32 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-
+    space: {
+        width: 20, 
+        height: 20,
+      },
+    button: {
+        marginTop: 10,
+        marginLeft: 10,
+        marginRight: 10,
+        marginBottom: 30,
+        backgroundColor: '#FB8DA0',
+    },
 
     buttons: {
         backgroundColor: '#FB8DA0',
-        padding: 500,
+        padding: 50,
         borderRadius: 30, // Make the buttons more round
-        marginTop: 100,
+        marginTop: 10,
         marginLeft: 10,
         marginRight: 10,
-        marginBottom: 300, // Add space between the buttons
-        alignItems: 'center',
-        justifyContent: 'center',
+        marginBottom: 30, // Add space between the buttons
         paddingVertical: 12,
         paddingHorizontal: 32,
         borderRadius: 20,
-        elevation: 100,
+        elevation: 50,
+    },
 
-    },
-    buttonsText: {
-        color: '#FB4570',
-        textAlign: 'center'
-    },
     time: {
         color: '#EFEBE0',
         textAlign: 'center',
@@ -123,5 +151,12 @@ const styles = StyleSheet.create({
         marginBottom: 30,
         elevation: 30,
         padding: 20,
+    },
+    image: {
+        borderBottomRightRadius: 20,
+        height: 100,
+        width: 200,
+        borderRadius: 30,
+        
     }
 });

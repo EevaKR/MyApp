@@ -55,13 +55,13 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="WELCOME">
         <Stack.Screen
-          name="Home"
+          name="WELCOME"
           component={Home}
           options={{
-            title: 'Home',
-            headerTitle: 'Home'
+            title: 'WELCOME',
+            headerTitle: 'WELCOME'
           }}
         />
         <Stack.Screen

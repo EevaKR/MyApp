@@ -37,26 +37,29 @@ export default function Home({ navigation }) {
     }, [])
 
     //const [url, setUrl] = useState('https://firebasestorage.googleapis.com/v0/b/sovellus-c0986.appspot.com/o/tooth-1670434_1920.png?alt=media&token=567a12db-d82b-4fdc-842b-ddd76b90d659');
-    const [url, setUrl] = useState()
+    const [url, setUrl] = useState();
+
     useEffect(() => {
         const func = async () => {
-            const storage = getFirestore();
-            const reference = ref()(storage, '/likainen_hammas.png');
+            const storage = getStorage();
+            const reference = ref(storage, '/tooth-1670434_1920.png');
             await getDownloadURL(reference)
                 .then((x) => {
                     setUrl(x);
                 })
         }
-        if (url == undefined) { func() };
-    }, [])
+
+        if (url == undefined) {func()};
+    }, []);
 
     return (
         <View style={styles.container}>
             <Image
-                style={{ width: '50%', height: '50%' }}
+                style={{ width: '50%', height: '50%', borderRadius: 30, }}
                 source={{ uri: url }}
+                
             />
-            <Text style={styles.text}>PEARL APP</Text>
+            <Text style={styles.text}>BRUSHING APP</Text>
         </View>
     )
 }

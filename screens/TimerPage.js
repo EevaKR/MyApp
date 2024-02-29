@@ -7,7 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { getStorage, ref, getDownloadURL } from 'firebase/storage'
 import { initializeApp } from 'firebase/app';
 
-export default function TimerPage(button, formattedtime,) {
+export default function TimerPage(button, formattedtime,navigation) {
 
     // useLayoutEffect(() => {
     //     navigation.setOptions({
@@ -16,6 +16,7 @@ export default function TimerPage(button, formattedtime,) {
     //         }
     //     })
     // }, [])
+    //setOptions ei toimi vielä
 
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
@@ -85,8 +86,6 @@ export default function TimerPage(button, formattedtime,) {
             <Image
                 style={styles.image}
                 source={{ uri: url }}
-
-
             />
             <FormattedTime />
             <View style={styles.buttons}>
@@ -110,13 +109,16 @@ const styles = StyleSheet.create({
     space: {
         width: 20, 
         height: 20,
-      },
+    },
     button: {
         marginTop: 10,
         marginLeft: 10,
         marginRight: 10,
         marginBottom: 30,
         backgroundColor: '#FB8DA0',
+        color: '#EFEBE0',
+        borderRadius: 30, // Make the buttons more round
+        textShadowColor: '#FB8DA0'
     },
 
     buttons: {
@@ -139,10 +141,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: 40,
-        marginTop: 10,
-        marginLeft: 10,
-        marginRight: 10,
-        marginBottom: 30,
         backgroundColor: '#FB8DA0',
         borderRadius: 30,
         marginTop: 10,
@@ -154,9 +152,12 @@ const styles = StyleSheet.create({
     },
     image: {
         borderBottomRightRadius: 20,
-        height: 100,
-        width: 200,
+        height: 360,
+        width: 395,
         borderRadius: 30,
-        
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 'auto',
+        marginBottom: 'auto',
     }
 });

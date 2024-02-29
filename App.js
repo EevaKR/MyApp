@@ -14,10 +14,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons'
 
 
-///hox tee components and screens kansiot ja jaa osiot ja sivut niihin
+
+//HOXXX App contains some software logic, for example, 
+//uses a map or/and stores data into phone’s memory. 
+//TÄMÄ PUUTTUU, TALLENNA AIKA TMS!!!!!!
 
 
-//propsit puuttuu
 export default function App() {
 
   const Stack = createNativeStackNavigator();
